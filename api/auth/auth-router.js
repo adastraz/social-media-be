@@ -5,7 +5,7 @@ const { jwtSecret } = require('../../database/config/secrets.js')
 
 const Users = require('../users/users-model.js')
 
-router.post('/register', validateCred, (req, res) => {
+router.post('/register', validateRegCred, (req, res) => {
     let user = req.body
     const hash = bcrypt.hashSync(user.password, 10)
     user.password = hash
@@ -15,7 +15,7 @@ router.post('/register', validateCred, (req, res) => {
         .catch(err => res.status(401).json(err))
 })
 
-router.post('/login', validateCred, (req, res) => {
+router.post('/login', validateLoginCred, (req, res) => {
     let { username, password } = req.body
     Users.findBy({ username })
         .first()
@@ -31,11 +31,25 @@ router.post('/login', validateCred, (req, res) => {
         .catch(err => res.status(500).json({ message: 'something went wrong, or incorrect username', error: err}))
 })
 
-function validateCred (req, res, next) {
+function validateLoginCred (req, res, next) {
     if (req.body.username && req.body.password) {
         next()
     } else {
         res.status(500).json({ message: 'enter a username and password' })
+    }
+}
+
+const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[`~!@#$%^&*()_=<+>?=.,]).{8,20}$/i
+
+function validateRegCred (req, res, next) {
+    if (req.body.username && req.body.password && req.body.birthday) {
+        if (passwordPattern.test(req.body.password)) {
+            next()
+        } else {
+            res.json({ message: 'does not meet password requirements' })
+        }
+    } else {
+        res.status(500).json({ message: 'enter a username, password, and birthday' })
     }
 }
 
