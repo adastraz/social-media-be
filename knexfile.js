@@ -6,6 +6,9 @@ module.exports = {
       filename: './database/socialmedia.db3'
     },
     useNullAsDefault: true,
+    migrations: {
+      directory: "./database/migrations"
+  },
   },
 
   staging: {
