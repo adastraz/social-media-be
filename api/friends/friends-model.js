@@ -10,8 +10,8 @@ module.exports = {
 
 function findAll(user) {
     return db('friends')
-        .join('users', 'friends.friend_id', 'users.id')
-        // .join('users', 'friends.friend_id', 'users.id')
+        .leftJoin('users', 'friends.friend_id', 'users.id')
+        // .leftJoin('users', 'friends.user_id', 'users.id')
         .where({ user_id: user })
 }
 
