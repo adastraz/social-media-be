@@ -11,7 +11,6 @@ module.exports = {
 function findAll(user) {
     return db('friends')
         .leftJoin('users', 'friends.friend_id', 'users.id')
-        // .leftJoin('users', 'friends.user_id', 'users.id')
         .where({ user_id: user })
 }
 
