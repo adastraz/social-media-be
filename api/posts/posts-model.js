@@ -3,7 +3,8 @@ const db = require('../../database/dbConfig.js')
 module.exports = {
     findByUser,
     add,
-    remove
+    remove,
+    findById
 }
 
 function findByUser(id) {
@@ -15,6 +16,12 @@ function findByUser(id) {
 async function add(user, post) {
     return db('posts')
         .insert(post, { user_id: user })
+}
+
+function findById(id) {
+    return db('posts')
+        .where({ id })
+        .first()
 }
 
 function remove(user, post) {
