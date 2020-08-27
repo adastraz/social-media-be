@@ -56,7 +56,7 @@ function validateRegCred (req, res, next) {
 function generateToken (user) {
     const payload = {
         id: user.id,
-         username: user.username,
+        username: user.username,
     }
     const options = {
         expiresIn: '1hr'
