@@ -4,7 +4,13 @@ module.exports = {
     findByUser,
     add,
     remove,
+    find,
     findById
+}
+
+function find() {
+    return db('posts')
+        .join('users', 'posts.user_id', 'users.id').select('posts.*', 'users.username')
 }
 
 function findByUser(id) {
