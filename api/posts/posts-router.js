@@ -2,6 +2,12 @@ const router = require('express').Router()
 
 const Posts = require('./posts-model.js')
 
+router.get('/', (req, res) => {
+    Posts.find()
+        .then(posts => res.status(200).json(posts))
+        .catch(err => res.status(500).json(err))
+})
+
 router.get('/:id', (req, res) => {
     const { id } = req.params
 
