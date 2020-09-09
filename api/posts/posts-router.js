@@ -41,7 +41,7 @@ router.post('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     const { id } = req.params
 
-    Posts.remove(id, req.body)
+    Posts.remove(id, req.body.postid)
         .then(success => res.json(200).json(success))
         .catch(err => res.status(500).json({ message: 'could not delete', err }))
 })
