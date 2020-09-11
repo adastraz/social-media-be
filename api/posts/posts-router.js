@@ -38,6 +38,22 @@ router.post('/:id', (req, res) => {
         .catch(err => res.json(500).json({ message: 'could not post', err }))
 })
 
+router.post('/:id/like', (req, res) => {
+    const { id } = req.params
+
+    Posts.addLike(req.body.like_username, id)
+        .then(success => res.json(200).json(success))
+        .catch(err => res.json(500).json({ message: 'could not like post', err }))
+})
+
+router.delete('/:id/like', (req, res) => {
+    const { id } = req.params
+
+    Posts.removeLike(req.body.like_username, id)
+        .then(success => res.json(200).json(success))
+        .catch(err => res.json(500).json({ message: 'could not like post', err }))
+})
+
 router.delete('/:id', (req, res) => {
     const { id } = req.params
 
