@@ -7,7 +7,9 @@ module.exports = {
     find,
     findById,
     addLike,
-    removeLike
+    removeLike,
+    addLikeToPost,
+    removeLikeToPost
 }
 
 function find() {
@@ -31,10 +33,22 @@ async function addLike(like_user, post_id) {
         .insert({ like_username: like_user, post_id: post_id })
 }
 
+async function addLikeToPost(post_id, like_num) {
+    return db('posts')
+        .where({ id: post_id })
+        .update({ like_number: like_num+1 })
+}
+
 function removeLike(like_user, post_id) {
     return db('likes')
         .where({ like_username: like_user, post_id: post_id })
         .del()
+}
+
+async function removeLikeToPost(post_id, like_num) {
+    return db('posts')
+        .where({ id: post_id })
+        .update({ like_number: like_num-1 })
 }
 
 function findById(id) {
