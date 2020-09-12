@@ -38,6 +38,50 @@ router.post('/:id', (req, res) => {
         .catch(err => res.json(500).json({ message: 'could not post', err }))
 })
 
+router.post('/:id/like', (req, res) => {
+    const { id } = req.params
+
+    Posts.addLike(req.body.like_username, id)
+        .then(success => {
+            Posts.findById(id)
+                .then(post => {
+                    if(post) {
+                        Posts.addLikeToPost(id, post.like_number)
+                        .then(complete => {
+                            res.status(200).json(complete)
+                        })
+                        .catch(incomplete => res.status(500).json({ message: 'failed to like post', incomplete }))
+                    } else {
+                        res.status(404).json({ message: 'could not find post' })
+                    }
+                })
+                .catch(err => res.status(500).json({ message: 'Failed to get post', err  }))
+        })
+        .catch(err => res.json(500).json({ message: 'could not like post', err }))
+})
+
+router.delete('/:id/like', (req, res) => {
+    const { id } = req.params
+
+    Posts.removeLike(req.body.like_username, id)
+        .then(success => {
+            Posts.findById(id)
+                .then(post => {
+                    if(post) {
+                        Posts.removeLikeToPost(id, post.like_number)
+                        .then(complete => {
+                            res.status(200).json(complete)
+                        })
+                        .catch(incomplete => res.status(500).json({ message: 'failed to unlike post', incomplete }))
+                    } else {
+                        res.status(404).json({ message: 'could not find post' })
+                    }
+                })
+                .catch(err => res.status(500).json({ message: 'Failed to get post', err  }))
+        })
+        .catch(err => res.json(500).json({ message: 'could not like post', err }))
+})
+
 router.delete('/:id', (req, res) => {
     const { id } = req.params
 
