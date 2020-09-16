@@ -9,7 +9,11 @@ module.exports = {
     addLike,
     removeLike,
     addLikeToPost,
-    removeLikeToPost
+    removeLikeToPost,
+    addComment,
+    addCommentToPost,
+    removeComment,
+    removeCommentToPost
 }
 
 function find() {
@@ -39,10 +43,33 @@ async function addLikeToPost(post_id, like_num) {
         .update({ like_number: like_num+1 })
 }
 
+async function addComment(comment_user, post_id, comment) {
+    return db('comments')
+        .insert({ comment_username: comment_user, post_id: post_id, comment: comment })
+}
+
+async function addCommentToPost(post_id, comment_num) {
+    return db('posts')
+        .where({ id: post_id })
+        .update({ comment_number: comment_num+1 })
+}
+
 function removeLike(like_user, post_id) {
     return db('likes')
         .where({ like_username: like_user, post_id: post_id })
         .del()
+}
+
+function removeComment(comment_id) {
+    return db('comments')
+        .where({ id: comment_id })
+        .del()
+}
+
+async function removeCommentToPost(comment_id, comment_num) {
+    return db('posts')
+        .where({ id: comment_id })
+        .update({ comment_number: comment_num-1 })
 }
 
 async function removeLikeToPost(post_id, like_num) {

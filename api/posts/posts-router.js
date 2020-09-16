@@ -79,7 +79,51 @@ router.delete('/:id/like', (req, res) => {
                 })
                 .catch(err => res.status(500).json({ message: 'Failed to get post', err  }))
         })
-        .catch(err => res.json(500).json({ message: 'could not like post', err }))
+        .catch(err => res.json(500).json({ message: 'could not unlike post', err }))
+})
+
+router.post('/:id/comment', (req, res) => {
+    const { id } = req.params
+
+    Posts.addComment(req.body.comment_username, id, req.body.comment)
+        .then(success => {
+            Posts.findById(id)
+                .then(post => {
+                    if(post) {
+                        Posts.addCommentToPost(id, post.comment_number)
+                        .then(complete => {
+                            res.status(200).json(complete)
+                        })
+                        .catch(incomplete => res.status(500).json({ message: 'failed to post comment', incomplete }))
+                    } else {
+                        res.status(404).json({ message: 'could not find post' })
+                    }
+                })
+                .catch(err => res.status(500).json({ message: 'Failed to get post', err  }))
+        })
+        .catch(err => res.json(500).json({ message: 'could not post comment', err }))
+})
+
+router.delete('/:id/comment', (req, res) => {
+    const { id } = req.params
+
+    Posts.removeComment(req.body.comment_id)
+        .then(success => {
+            Posts.findById(id)
+                .then(post => {
+                    if(post) {
+                        Posts.removeCommentToPost(id, post.comment_number)
+                        .then(complete => {
+                            res.status(200).json(complete)
+                        })
+                        .catch(incomplete => res.status(500).json({ message: 'failed to remove comment', incomplete }))
+                    } else {
+                        res.status(404).json({ message: 'could not find post' })
+                    }
+                })
+                .catch(err => res.status(500).json({ message: 'Failed to get post', err  }))
+        })
+        .catch(err => res.json(500).json({ message: 'could not remove comment', err }))
 })
 
 router.delete('/:id', (req, res) => {
