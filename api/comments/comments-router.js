@@ -1,14 +1,14 @@
 const router = require('express').Router()
 
-const Likes = require('./likes-model.js')
+const Comments = require('./comments-model.js')
 const Users = require('../users/users-model.js')
 
 router.get('/:id/post', (req, res) => {
     const { id } = req.params
 
-    Likes.findById(id)
+    Comments.findById(id)
         .then(posts => res.status(200).json(posts))
-        .catch(err => res.status(500).json({ message: 'could not find posts with likes', err }))
+        .catch(err => res.status(500).json({ message: 'could not find posts with comments', err }))
 })
 
 router.get('/:id/user', (req, res) => {
@@ -16,9 +16,9 @@ router.get('/:id/user', (req, res) => {
 
     Users.findById(id)
         .then(users => {
-            Likes.findByUsername(users.username)
+            Comments.findByUsername(users.username)
                 .then(posts => res.status(200).json(posts))
-                .catch(err => res.status(404).json({ message: 'could not find posts with likes', err}))
+                .catch(err => res.status(404).json({ message: 'could not find posts with comments', err}))
         })
         .catch(err => res.status(500).json({ message: 'could not find user', err }))
 })

@@ -8,6 +8,7 @@ const usersRouter = require('./users/users-router.js')
 const friendsRouter = require('./friends/friends-router.js')
 const postsRouter = require('./posts/posts-router.js')
 const likesRouter = require('./likes/likes-router.js')
+const commentsRouter = require('./comments/comments-router.js')
 
 const server = express()
 
@@ -20,6 +21,7 @@ server.use('/api/users', authenticate, usersRouter)
 server.use('/api/friends', authenticate, friendsRouter)
 server.use('/api/posts', authenticate, postsRouter)
 server.use('/api/likes', authenticate, likesRouter)
+server.use('/api/comments', authenticate, commentsRouter)
 
 server.get('/', (req, res) => {
     const response = ({
