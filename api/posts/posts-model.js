@@ -19,6 +19,7 @@ module.exports = {
 function find() {
     return db('posts')
         .join('users', 'posts.user_id', 'users.id').select('posts.*', 'users.username')
+        .orderBy('id', 'desc')
 }
 
 function findByUser(id) {
