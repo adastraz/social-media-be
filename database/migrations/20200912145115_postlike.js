@@ -7,5 +7,11 @@ exports.up = function(knex) {
 }
 
 exports.down = function(knex) {
-    return knexIfHaveDropColumn('posts', 'like_number')
+    return knex.schema.table('posts', tbl => {
+        knex.schema.hasColumn('posts', 'like_number').then(exists => {
+            if (exists) {
+                tbl.dropColumn('like_number')
+            }
+        })
+    })
 }

@@ -6,6 +6,7 @@ exports.up = function(knex) {
             tbl.string('comment_username').unsigned().references('username').inTable('users')
             tbl.integer('post_id').unsigned().references('id').inTable('posts')
             tbl.string('comment').notNullable()
+            tbl.timestamps(false, true)
         })
 }
 
