@@ -42,11 +42,11 @@ function validateLoginCred (req, res, next) {
 const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[`~!@#$%^&*()_=<+>?=.,]).{8,20}$/i
 
 function validateRegCred (req, res, next) {
-    if (req.body.username && req.body.password && req.body.birthday) {
+    if (req.body.username && req.body.password && req.body.birthdate) {
         if (passwordPattern.test(req.body.password)) {
             next()
         } else {
-            res.json({ message: 'does not meet password requirements' })
+            res.status(200).json({ message: 'does not meet password requirements' })
         }
     } else {
         res.status(500).json({ message: 'enter a username, password, and birthday' })
