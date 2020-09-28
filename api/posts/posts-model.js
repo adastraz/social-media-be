@@ -13,7 +13,8 @@ module.exports = {
     addComment,
     addCommentToPost,
     removeComment,
-    removeCommentToPost
+    removeCommentToPost,
+    update
 }
 
 function find() {
@@ -33,6 +34,12 @@ async function add(user, post) {
         .insert(post, { user_id: user })
 }
 
+function update (id, changes){
+    return db('posts')
+        .where({ id })
+        .update(changes)
+
+}
 async function addLike(like_user, post_id) {
     return db('likes')
         .insert({ like_username: like_user, post_id: post_id })

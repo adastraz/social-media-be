@@ -16,6 +16,26 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(500).json({ message: 'could not find posts', err }))
 })
 
+router.put('/:id', idPost, (req, res) => {
+    const { id } = req.params
+
+    Posts.findById(id)
+    .then(post => {
+        if (post) {
+            Posts.update(id, req.body)
+            .then(updated => {
+                res.status(200).json(updated)
+        })
+        } else {
+            res.status(404).json({ message: 'Could not find post with given id' })
+        }
+    })
+    .catch (err => {
+        res.status(500).json({ message: 'Failed to update post' });
+    })
+})
+
+
 router.get('/:id/post', idPost, (req, res) => {
     const { id } = req.params
 
