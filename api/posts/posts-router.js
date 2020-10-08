@@ -149,7 +149,7 @@ router.delete('/:id', (req, res) => {
 
     Posts.remove(id, req.body.postid)
         .then(success => res.json(200).json(success))
-        .catch(err => res.status(500).json({ message: 'could not delete', err }))
+        .catch(err => res.status(200).json(err))
 })
 
 function idPost (req, res, next) {
