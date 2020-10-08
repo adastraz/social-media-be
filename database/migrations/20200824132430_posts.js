@@ -6,7 +6,7 @@ exports.up = function(knex) {
             tbl.integer('user_id').unsigned().references('id').inTable('users').notNullable()
             tbl.string('post').notNullable()
             tbl.string('img')
-            tbl.string('created_at')
+            tbl.timestamps(false, true)
             tbl.string('location')
         })
 }
