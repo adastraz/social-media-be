@@ -29,9 +29,9 @@ function findByUser(id) {
         .orderBy('id', 'desc')
 }
 
-async function add(user, post) {
-    return db('posts')
-        .insert(post, { user_id: user })
+async function add(post) {
+    const [id] = await db('posts').insert(post)
+    return id
 }
 
 function update (id, changes){
