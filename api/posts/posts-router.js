@@ -54,8 +54,8 @@ router.post('/:id', (req, res) => {
     const { id } = req.params
 
     Posts.add(id, req.body)
-        .then(success => res.json(200).json(success))
-        .catch(err => res.json(500).json({ message: 'could not post', err }))
+        .then(success => res.status(200).json(success))
+        .catch(err => res.status(500).json({ message: 'could not post', err }))
 })
 
 router.post('/:id/like', (req, res) => {
