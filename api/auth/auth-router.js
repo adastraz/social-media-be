@@ -12,7 +12,7 @@ router.post('/register', validateRegCred, (req, res) => {
 
     Users.add(user)
         .then(saved => res.status(200).json(saved))
-        .catch(err => res.status(401).json(err))
+        .catch(err => res.status(200).json(err))
 })
 
 router.post('/login', validateLoginCred, (req, res) => {
