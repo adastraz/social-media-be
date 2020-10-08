@@ -92,7 +92,7 @@ function findById(id) {
         .first()
 }
 
-function remove(user, post) {
+async function remove(user, post) {
     return db('posts')
         .where({ user_id: user, id: post })
         .del()
