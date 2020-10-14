@@ -1,6 +1,6 @@
 # **API User Guide**
 
-Server located at: 
+Server located at: https://socialclone1.herokuapp.com/
 
 |**Table of Contents:**|
 |-|
