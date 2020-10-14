@@ -11,7 +11,8 @@ Server located at: https://socialclone1.herokuapp.com/
 
 ### **Authentication Routes**
 
-#### POST */api/register/user*
+### **Register**
+#### POST */api/register*
 
 Creates a new user account.
 Returns an object with user info.
@@ -45,7 +46,7 @@ Response:
 }
 ```
 
-### **User Login** 
+### **Login** 
 [back to top](#api-user-guide)
 #### POST */api/login*
 
@@ -312,4 +313,228 @@ Response:
         "company_description": "Testing a random description here, another one"
     }
 ]
+```
+
+### **Post Routes** 
+
+### GET */api/posts*
+
+Returns an array of all posts ordered by most recent -> least recent. 
+
+Request:
+```javascript
+// No input needed
+```
+Response: 
+```javascript
+[
+    {
+        "id": 10,
+        "user_id": 1,
+        "post": "hi owen",
+        "img": "yehaw",
+        "created_at": "2020-10-09T22:38:29.908Z",
+        "updated_at": "2020-10-09T22:38:29.908Z",
+        "location": "my desk",
+        "like_number": 0,
+        "comment_number": 1,
+        "username": "tyler"
+    },
+    {
+        "id": 9,
+        "user_id": 7,
+        "post": "Hi Tyler!",
+        "img": "",
+        "created_at": "2020-10-09T17:45:43.802Z",
+        "updated_at": "2020-10-09T17:45:43.802Z",
+        "location": "",
+        "like_number": 0,
+        "comment_number": 1,
+        "username": "Rditalia"
+    }
+]
+```
+### GET */api/posts/:id*
+
+Returns an array of all posts at the given users id ordered by most recent -> least recent. 
+
+Request:
+```javascript
+// No input needed
+```
+Response: 
+```javascript
+[
+    {
+        "id": 10,
+        "user_id": 1,
+        "post": "hi owen",
+        "img": "yehaw",
+        "created_at": "2020-10-09T22:38:29.908Z",
+        "updated_at": "2020-10-09T22:38:29.908Z",
+        "location": "my desk",
+        "like_number": 0,
+        "comment_number": 1,
+        "username": "tyler"
+    },
+    {
+        "id": 12,
+        "user_id": 1,
+        "post": "This works",
+        "img": "",
+        "created_at": "2020-10-10T17:42:43.802Z",
+        "updated_at": "2020-10-09T17:42:43.802Z",
+        "location": "",
+        "like_number": 6,
+        "comment_number": 1,
+        "username": "Rditalia"
+    }
+]
+```
+### GET */api/posts/:id/post*
+
+Returns a post at the given id. 
+
+Request:
+```javascript
+// No input needed
+```
+Response: 
+```javascript
+{
+    "id": 6,
+    "user_id": 5,
+    "post": "cap'n",
+    "img": "",
+    "created_at": "2020-10-08T22:16:42.355Z",
+    "updated_at": "2020-10-08T22:16:42.355Z",
+    "location": "",
+    "like_number": 0,
+    "comment_number": 0
+}
+```
+### POST */api/posts/:id*
+
+Posts post to the users given id. 
+
+Request:
+```javascript
+{
+    "user_id": 1,
+    "post": "this is a test",
+    "location": "testing dock station",
+    "img": "yeperino"
+}
+```
+Response: 
+```javascript
+{
+    "id": 15,
+    "user_id": 1,
+    "post": "this is a test",
+    "img": "yeperino",
+    "created_at": "2020-10-08T22:16:42.355Z",
+    "updated_at": "2020-10-08T22:16:42.355Z",
+    "location": "testing dock station",
+    "like_number": 0,
+    "comment_number": 0
+}
+```
+### POST */api/posts/:id/like*
+
+Likes post at the given postid as long as a correct username is provided.
+
+Request:
+```javascript
+{
+    "like_username": "tyler"
+}
+```
+Response: 
+```javascript
+1
+```
+### POST */api/posts/:id/comment*
+
+Leaves a comment at the given postid. 
+
+Request:
+```javascript
+{
+    "comment_username": "tyler",
+    "comment": "testing posting a comment"
+}
+```
+Response: 
+```javascript
+1
+```
+### PUT */api/posts/:id*
+
+Edits post at the given postid.
+
+Request:
+```javascript
+{
+    "post": "this is a testing round",
+    "location": "testing dock stations station",
+    "img": "yeperinoz"
+}
+```
+Response: 
+```javascript
+{
+    "id": 15,
+    "user_id": 1,
+    "post": "this is a testing round",
+    "img": "yeperinoz",
+    "created_at": "2020-10-08T22:16:42.355Z",
+    "updated_at": "2020-10-08T22:16:42.355Z",
+    "location": "testing dock stations stations",
+    "like_number": 0,
+    "comment_number": 0
+}
+```
+### DELETE */api/posts/:id*
+
+Deletes a post at the given userid if provided a postid
+
+Request:
+```javascript
+{
+    "postid": 15
+}
+```
+Response: 
+```javascript
+1
+```
+### DELETE */api/posts/:id/like*
+
+Deletes a like at the given postid if provided a like_username
+
+Request:
+```javascript
+{
+    "like_username": "tyler
+}
+```
+Response: 
+```javascript
+1
+```
+### DELETE */api/posts/:id/comment*
+
+Deletes a comment at the given postid if provided a comment_username and a comment
+
+Request:
+```javascript
+{
+    "comment_username": "tyler,
+    "comment": "testing posting a comment"
+}
+```
+Response: 
+```javascript
+1
 ```
