@@ -8,6 +8,8 @@ Server located at: https://socialclone1.herokuapp.com/
 |[User Routes](#User-Routes)|
 |[Follow Routes](#Follow-Routes)|
 |[Post Routes](#Post-Routes)|
+|[Like Routes](#Like-Routes)|
+|[Comment Routes](#Comment-Routes)|
 
 ### **Authentication Routes**
 
@@ -316,7 +318,9 @@ Response:
 ```
 
 ### **Post Routes** 
+[back to top](#api-user-guide)
 
+### **List all Posts**
 ### GET */api/posts*
 
 Returns an array of all posts ordered by most recent -> least recent. 
@@ -354,6 +358,7 @@ Response:
     }
 ]
 ```
+### **List posts by a specific user**
 ### GET */api/posts/:id*
 
 Returns an array of all posts at the given users id ordered by most recent -> least recent. 
@@ -391,6 +396,7 @@ Response:
     }
 ]
 ```
+### **Get specific post**
 ### GET */api/posts/:id/post*
 
 Returns a post at the given id. 
@@ -413,6 +419,7 @@ Response:
     "comment_number": 0
 }
 ```
+### **Post a post**
 ### POST */api/posts/:id*
 
 Posts post to the users given id. 
@@ -440,6 +447,7 @@ Response:
     "comment_number": 0
 }
 ```
+### **Like a post**
 ### POST */api/posts/:id/like*
 
 Likes post at the given postid as long as a correct username is provided.
@@ -454,6 +462,7 @@ Response:
 ```javascript
 1
 ```
+### **Comment on a post**
 ### POST */api/posts/:id/comment*
 
 Leaves a comment at the given postid. 
@@ -469,6 +478,7 @@ Response:
 ```javascript
 1
 ```
+### **Edit a post**
 ### PUT */api/posts/:id*
 
 Edits post at the given postid.
@@ -495,6 +505,7 @@ Response:
     "comment_number": 0
 }
 ```
+### **Delete a post**
 ### DELETE */api/posts/:id*
 
 Deletes a post at the given userid if provided a postid
@@ -509,6 +520,7 @@ Response:
 ```javascript
 1
 ```
+### **Remove a like**
 ### DELETE */api/posts/:id/like*
 
 Deletes a like at the given postid if provided a like_username
@@ -523,6 +535,7 @@ Response:
 ```javascript
 1
 ```
+### **Remove a comment**
 ### DELETE */api/posts/:id/comment*
 
 Deletes a comment at the given postid if provided a comment_username and a comment
@@ -538,3 +551,114 @@ Response:
 ```javascript
 1
 ```
+
+### **Like Routes**
+
+### **Get likes at postid**
+### GET */api/likes/:id/post*
+
+Returns array of all users who have liked that specfic post.
+
+Request: 
+```javascipt
+// No input needed
+```
+Response:
+```javascript
+[
+    {
+        "id": 11,
+        "like_username": "tyler",
+        "post_id": 6
+    }
+]
+```
+### **Get likes at userid**
+### GET */api/likes/:id/user*
+
+Returns array of all likes the specified user (id) has along with the corrisponding post ids to each like given.
+
+Request: 
+```javascipt
+// No input needed
+```
+Response:
+```javascript
+[
+    {
+        "id": 9,
+        "like_username": "tyler",
+        "post_id": 8
+    },
+    {
+        "id": 11,
+        "like_username": "tyler",
+        "post_id": 6
+    }
+]
+```
+
+### **Comment Routes**
+
+### **Get comments at postid**
+### GET */api/comments/:id/post*
+
+Returns array of all users who have commented that specfic post.
+
+Request: 
+```javascipt
+// No input needed
+```
+Response:
+```javascript
+[
+    {
+        "id": 15,
+        "comment_username": "tyler",
+        "post_id": 6,
+        "comment": "testing posting a comment",
+        "created_at": "2020-10-14T17:58:32.917Z",
+        "updated_at": "2020-10-14T17:58:32.917Z"
+    }
+]
+```
+### **Get comments at userid**
+### GET */api/comments/:id/user*
+
+Returns array of all comments the specified user (id) has along with the corrisponding post ids to each comment posted.
+
+Request: 
+```javascipt
+// No input needed
+```
+Response:
+```javascript
+[
+    {
+        "id": 5,
+        "comment_username": "tyler",
+        "post_id": 7,
+        "comment": "I personally love to ski!",
+        "created_at": "2020-10-08T22:19:50.075Z",
+        "updated_at": "2020-10-08T22:19:50.075Z"
+    },
+    {
+        "id": 14,
+        "comment_username": "tyler",
+        "post_id": 10,
+        "comment": "yes hi",
+        "created_at": "2020-10-09T22:38:59.751Z",
+        "updated_at": "2020-10-09T22:38:59.751Z"
+    },
+    {
+        "id": 15,
+        "comment_username": "tyler",
+        "post_id": 6,
+        "comment": "testing posting a comment",
+        "created_at": "2020-10-14T17:58:32.917Z",
+        "updated_at": "2020-10-14T17:58:32.917Z"
+    }
+]
+```
+
+
