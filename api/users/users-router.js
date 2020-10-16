@@ -25,6 +25,23 @@ router.get('/:id', idUser, (req, res) => {
         })
 })
 
+router.get('/:id/username', (req, res) => {
+    const { id } = req.params
+
+    Users.findBy({ username: id })
+        .then(user => {
+            if (user) {
+                res.json(user)
+            } else {
+                res.status(404).json({ message: 'Could not find the user with given id.' })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ message: 'Failed to get user' })
+        })
+})
+
 router.put('/:id', idUser, (req, res) => {
     const { id } = req.params
 
