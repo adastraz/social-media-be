@@ -7,6 +7,7 @@ exports.up = function(knex) {
             tbl.integer('post_id').unsigned().references('id').inTable('posts').onDelete('CASCADE')
             tbl.string('comment').notNullable()
             tbl.timestamps(false, true)
+            tbl.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
         })
 }
 

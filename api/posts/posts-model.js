@@ -51,9 +51,9 @@ async function addLikeToPost(post_id, like_num) {
         .update({ like_number: like_num+1 })
 }
 
-async function addComment(comment_user, post_id, comment) {
+async function addComment(comment_user, post_id, comment, user_id) {
     return db('comments')
-        .insert({ comment_username: comment_user, post_id: post_id, comment: comment })
+        .insert({ comment_username: comment_user, post_id: post_id, comment: comment, user_id: user_id })
 }
 
 async function addCommentToPost(post_id, comment_num) {
