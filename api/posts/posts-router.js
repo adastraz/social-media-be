@@ -103,7 +103,7 @@ router.delete('/:id/like', (req, res) => {
 router.post('/:id/comment', (req, res) => {
     const { id } = req.params
 
-    Posts.addComment(req.body.comment_username, id, req.body.comment)
+    Posts.addComment(req.body.comment_username, id, req.body.comment, req.body.user_id)
         .then(success => {
             Posts.findById(id)
                 .then(post => {
