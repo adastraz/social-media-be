@@ -5,6 +5,7 @@ exports.up = function(knex) {
             tbl.increments()
             tbl.string('like_username').unsigned().references('username').inTable('users').onDelete('CASCADE')
             tbl.integer('post_id').unsigned().references('id').inTable('posts').onDelete('CASCADE')
+            tbl.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
         })
 }
 
