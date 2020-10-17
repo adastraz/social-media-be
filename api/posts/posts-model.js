@@ -40,9 +40,9 @@ function update (id, changes){
         .update(changes)
 
 }
-async function addLike(like_user, post_id) {
+async function addLike(like_user, post_id, user_id) {
     return db('likes')
-        .insert({ like_username: like_user, post_id: post_id })
+        .insert({ like_username: like_user, post_id: post_id, user_id: user_id })
 }
 
 async function addLikeToPost(post_id, like_num) {

@@ -59,7 +59,7 @@ router.post('/:id', (req, res) => {
 router.post('/:id/like', (req, res) => {
     const { id } = req.params
 
-    Posts.addLike(req.body.like_username, id)
+    Posts.addLike(req.body.like_username, id, req.body.user_id)
         .then(success => {
             Posts.findById(id)
                 .then(post => {
