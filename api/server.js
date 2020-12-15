@@ -9,6 +9,7 @@ const friendsRouter = require('./friends/friends-router.js')
 const postsRouter = require('./posts/posts-router.js')
 const likesRouter = require('./likes/likes-router.js')
 const commentsRouter = require('./comments/comments-router.js')
+const ViewPosts = require('./viewposts/viewposts-router.js')
 
 const server = express()
 
@@ -17,6 +18,7 @@ server.use(cors())
 server.use(express.json())
 
 server.use('/api/auth', authRouter)
+server.use('/api/viewposts', ViewPosts)
 server.use('/api/users', authenticate, usersRouter)
 server.use('/api/friends', authenticate, friendsRouter)
 server.use('/api/posts', authenticate, postsRouter)
