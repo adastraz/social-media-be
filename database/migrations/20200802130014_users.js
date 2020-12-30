@@ -11,15 +11,11 @@ exports.up = function(knex) {
             tbl.string('bio')
             tbl.string('profileimg')
             tbl.string('coverimg')
-            tbl.string('relationship')
             tbl.date('birthday')
                 .notNullable()
             tbl.timestamps(false, true)
-            tbl.string('phone_number', 15)
-            tbl.string('nickname')
-            tbl.string('location')
-            tbl.string('workplace')
-            tbl.string('education')
+            tbl.boolean('is_player')
+                .defaultTo('false')
         })
 }
 
