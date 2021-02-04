@@ -19,7 +19,7 @@ module.exports = {
 
 function find() {
     return db('posts')
-        .join('users', 'posts.user_id', 'users.id').select('posts.*', 'users.username')
+        .join('users', 'posts.user_id', 'users.id').select('posts.*', 'users.username', 'users.is_player')
         .orderBy('id', 'desc')
 }
 

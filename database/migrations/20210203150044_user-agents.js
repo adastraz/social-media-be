@@ -1,22 +1,18 @@
 
 exports.up = function(knex) {
     return knex.schema
-        .createTable('users_details', tbl => {
+        .createTable('users_agents', tbl => {
             tbl.increments()
             tbl.string('user_id')
                 .unsigned()
                 .references('id')
                 .inTable('users')
                 .onDelete('CASCADE')
-            tbl.string('twitch_link')
-                .defaultTo(null)
-            tbl.string('youtube_link')
-                .defaultTo(null)
-            tbl.string('rank')
+            tbl.string('agent_name')
                 .notNullable()
         })
 }
 
 exports.down = function(knex) {
-    knex.schema.dropTableIfExists('users_details')
+    knex.schema.dropTableIfExists('users_agents')
 }

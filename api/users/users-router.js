@@ -1,6 +1,7 @@
 const router = require('express').Router()
 
 const Users = require('./users-model.js')
+const Details = require('./details-model.js')
 
 router.get('/', (req, res) => {
     Users.find()
@@ -63,6 +64,78 @@ router.put('/:id', idUser, (req, res) => {
         })
 })
 
+router.post('/:id/details/user', idUser, (req, res) => {
+    Details.addDetails(req.body)
+        .then(success => res.status(200).json(success))
+        .catch(err => res.status(400).json(err))
+})
+
+router.post('/:id/details/creator', idUser, (req, res) => {
+    Details.addCreators(req.body)
+        .then(success => res.status(200).json(success))
+        .catch(err => res.status(400).json(err))
+})
+
+router.post('/:id/details/carpic', idUser, (req, res) => {
+    Details.addCarpics(req.body)
+        .then(success => res.status(200).json(success))
+        .catch(err => res.status(400).json(err))
+})
+
+router.post('/:id/details/othergame', idUser, (req, res) => {
+    Details.addOthergames(req.body)
+        .then(success => res.status(200).json(success))
+        .catch(err => res.status(400).json(err))
+})
+
+router.post('/:id/details/agent', idUser, (req, res) => {
+    Details.addAgents(req.body)
+        .then(success => res.status(200).json(success))
+        .catch(err => res.status(400).json(err))
+})
+
+router.post('/:id/details/ytlink', idUser, (req, res) => {
+    Details.addYtlinks(req.body)
+        .then(success => res.status(200).json(success))
+        .catch(err => res.status(400).json(err))
+})
+
+router.get('/:id/details/valorant', idUser, (req, res) => {
+    const { id } = req.params
+
+    Details.findDetails(id)
+        .then(userdetails => {
+            Details.findCreators(id)
+                .then(usercreators => {
+                    Details.findOthergames(id)
+                        .then(userothergames => {
+                            Details.findAgents(id)
+                                .then(useragents => {
+                                    Details.findYtlinks(id)
+                                        .then(userytlinks => {
+                                            res.status(200).json({
+                                                user_details: userdetails[0],
+                                                user_creators: usercreators,
+                                                user_othergames: userothergames,
+                                                user_agents: useragents,
+                                                user_ytlinks: userytlinks
+                                            })
+                                        })
+                                        .catch(err => res.status(500).json(err, 'ytlinks'))
+                                })
+                                .catch(err => res.status(500).json(err, 'agents'))
+
+                        })
+                        .catch(err => res.status(500).json(err, 'othergames'))
+                })
+                .catch(err => res.status(500).json(err, 'creators'))
+        })
+        .catch(err => res.status(500).json(err, 'details'))
+
+    // Details.findCarpics(id)
+    //     .then(users => carpics = users)
+    //     .catch(err => res.status(500).json(err))
+})
 
 router.delete('/:id', idUser, (req, res) => {
     const { id } = req.params

@@ -8,6 +8,7 @@ module.exports = {
 function findById(id) {
     return db('comments')               
         .where({ post_id: id })
+        .join('users', 'comments.comment_username', 'users.username').select('comments.*', 'users.is_player')
 }
 
 function findByUsername(id) {

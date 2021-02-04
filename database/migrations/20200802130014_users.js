@@ -9,7 +9,11 @@ exports.up = function(knex) {
             tbl.string('password', 255)
                 .notNullable()
             tbl.boolean('is_player')
-                .defaultTo('false')
+                .defaultTo(false)
+            tbl.string('team')
+                .defaultTo(null)
+            tbl.string('game')
+                .defaultTo(null)
         })
 }
 
