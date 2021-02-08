@@ -3,7 +3,7 @@ exports.up = function(knex) {
     return knex.schema
         .createTable('users_othergames', tbl => {
             tbl.increments()
-            tbl.string('user_id')
+            tbl.integer('user_id')
                 .unsigned()
                 .references('id')
                 .inTable('users')
