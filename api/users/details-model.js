@@ -14,8 +14,11 @@ module.exports = {
     addOthergames,
     addAgents,
     addYtlinks,
-    update,
-    remove
+    removeCreator,
+    removeAgent,
+    removeYtlinks,
+    removeOthergames,
+    removeCarpics
 }
 
 function findDetails(id) {
@@ -102,14 +105,28 @@ async function addYtlinks(user) {
     return findById(id, 'users_youtubelinks')
 }
 
-function update (id, changes){
-    return db('users')
+function removeCreator(id) {
+    return db('users_creators')
         .where({ id })
-        .update(changes)
+        .del()
 }
-
-function remove(user, post) {
-    return db('posts')
-        .where({ user_id: user, id: post })
+function removeAgent(id) {
+    return db('users_agents')
+        .where({ id })
+        .del()
+}
+function removeYtlinks(id) {
+    return db('users_youtubelinks')
+        .where({ id })
+        .del()
+}
+function removeOthergames(id) {
+    return db('users_othergames')
+        .where({ id })
+        .del()
+}
+function removeCarpics(id) {
+    return db('users_carpics')
+        .where({ id })
         .del()
 }

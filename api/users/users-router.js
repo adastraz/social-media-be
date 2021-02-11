@@ -134,20 +134,41 @@ router.get('/:id/details/valorant', idUser, (req, res) => {
     //     .catch(err => res.status(500).json(err))
 })
 
-router.delete('/:id', idUser, (req, res) => {
+
+router.delete('/:id/delete/creator', (req, res) => {
     const { id } = req.params
 
-    Users.remove(id)
-        .then(deleted => {
-            if (deleted) {
-                res.status(200).json({ removed: deleted })
-            } else {
-                res.status(404).json({ message: 'Could not find user with given id' })
-            }
-        })
-        .catch(err => {
-            res.status(500).json({ message: 'Failed to delete user', err })
-        })
+    Details.removeCreator(id)
+        .then(success => res.json(200).json(success))
+        .catch(err => res.status(200).json(err))
+})
+router.delete('/:id/delete/agent', (req, res) => {
+    const { id } = req.params
+
+    Details.removeAgent(id)
+        .then(success => res.json(200).json(success))
+        .catch(err => res.status(200).json(err))
+})
+router.delete('/:id/delete/ytlinks', (req, res) => {
+    const { id } = req.params
+
+    Details.removeYtlinks(id)
+        .then(success => res.json(200).json(success))
+        .catch(err => res.status(200).json(err))
+})
+router.delete('/:id/delete/othergames', (req, res) => {
+    const { id } = req.params
+
+    Details.removeOthergames(id)
+        .then(success => res.json(200).json(success))
+        .catch(err => res.status(200).json(err))
+})
+router.delete('/:id/delete/carpics', (req, res) => {
+    const { id } = req.params
+
+    Details.removeCarpics(id)
+        .then(success => res.json(200).json(success))
+        .catch(err => res.status(200).json(err))
 })
 
 function idUser (req, res, next) {
