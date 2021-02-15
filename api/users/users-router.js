@@ -44,7 +44,7 @@ router.get('/:id/username', (req, res) => {
 router.put('/:id/details/user', idUser, (req, res) => {
     const { id } = req.params
 
-    Details.updateDetails(req.body.id, req.body.rank)
+    Details.updateDetails(id, req.body.rank)
         .then(res => res.status(200).json(res))
         .catch(err => res.status(404).json(err))
 })
@@ -122,12 +122,12 @@ router.get('/:id/details/valorant', idUser, (req, res) => {
     //     .catch(err => res.status(500).json(err))
 })
 
-router.delete('/:id', (req, res) => {
-    const { id } = req.params
+// router.delete('/:id', (req, res) => {
+//     const { id } = req.params
 
-    Users.remove(id)
-        .then(success => res.status(200).json(res))
-})
+//     Users.remove(id)
+//         .then(success => res.status(200).json(res))
+// })
 
 router.delete('/:id/delete/creator', (req, res) => {
     const { id } = req.params
