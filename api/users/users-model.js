@@ -5,7 +5,8 @@ module.exports = {
     find,
     findBy,
     findById,
-    update
+    update,
+    remove
 }
 
 function find() {
@@ -32,4 +33,10 @@ function update (id, changes){
     return db('users')
         .where({ id })
         .update(changes)
+}
+
+function remove(id, user){
+    return db('users')
+        .where({ id })
+        .del()
 }

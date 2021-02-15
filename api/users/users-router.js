@@ -43,11 +43,14 @@ router.get('/:id/username', (req, res) => {
 
 router.put('/:id', idUser, (req, res) => {
     const { id } = req.params
+    let user = req.body
+    const hash = bcrypt.hashSync(user.password, 10)
+    user.password = hash
 
     Users.findById(id)
-        .then(user => {
-            if (user) {
-                Users.update(id, req.body)
+        .then(useris => {
+            if (useris) {
+                Users.update(id, user)
                     .then(updatedUser => {
                         res.status(200).json(updatedUser)
                     })
@@ -134,6 +137,13 @@ router.get('/:id/details/valorant', idUser, (req, res) => {
     //     .catch(err => res.status(500).json(err))
 })
 
+router.delete('/:id', (req, res) => {
+    const { id } = req.params
+
+    Users.remove(id)
+        .then(success => res.status(200).json(res))
+        .catch(err => res.status(200).json(err))
+})
 
 router.delete('/:id/delete/creator', (req, res) => {
     const { id } = req.params
