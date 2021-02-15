@@ -18,7 +18,8 @@ module.exports = {
     removeAgent,
     removeYtlinks,
     removeOthergames,
-    removeCarpics
+    removeCarpics,
+    updateDetails
 }
 
 function findDetails(id) {
@@ -129,4 +130,10 @@ function removeCarpics(id) {
     return db('users_carpics')
         .where({ id })
         .del()
+}
+
+function updateDetails (id, changes){
+    return db('users_details')
+        .where({ id })
+        .update(changes)
 }

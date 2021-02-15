@@ -41,27 +41,12 @@ router.get('/:id/username', (req, res) => {
         })
 })
 
-router.put('/:id', idUser, (req, res) => {
+router.put('/:id/details/user', idUser, (req, res) => {
     const { id } = req.params
-    let user = req.body
-    const hash = bcrypt.hashSync(user.password, 10)
-    user.password = hash
 
-    Users.findById(id)
-        .then(useris => {
-            if (useris) {
-                Users.update(id, user)
-                    .then(updatedUser => {
-                        res.status(200).json(updatedUser)
-                    })
-                    .catch(err => res.status(401).json({ message: 'Failed to update user', err}))
-            } else {
-                res.status(404).json({ message: 'Could not find user with given id' })
-            }
-        })
-        .catch (err => {
-            res.status(500).json({ message: 'Invalid user', err })
-        })
+    Details.updateDetails(req.body.id, req.body.rank)
+        .then(res => res.status(200).json(res))
+        .catch(err => res.status(404).json(err))
 })
 
 router.post('/:id/details/user', idUser, (req, res) => {
@@ -142,7 +127,6 @@ router.delete('/:id', (req, res) => {
 
     Users.remove(id)
         .then(success => res.status(200).json(res))
-        .catch(err => res.status(200).json(err))
 })
 
 router.delete('/:id/delete/creator', (req, res) => {
