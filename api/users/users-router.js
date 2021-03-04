@@ -122,6 +122,43 @@ router.get('/:id/details/valorant', idUser, (req, res) => {
     //     .catch(err => res.status(500).json(err))
 })
 
+router.get('/:id/details/rl', idUser, (req, res) => {
+    const { id } = req.params
+
+    Details.findDetails(id)
+        .then(userdetails => {
+            Details.findCreators(id)
+                .then(usercreators => {
+                    Details.findOthergames(id)
+                        .then(userothergames => {
+                            Details.findCarpics(id)
+                                .then(carpics => {
+                                    Details.findYtlinks(id)
+                                        .then(userytlinks => {
+                                            res.status(200).json({
+                                                user_details: userdetails[0],
+                                                user_creators: usercreators,
+                                                user_othergames: userothergames,
+                                                user_carpics: carpics,
+                                                user_ytlinks: userytlinks
+                                            })
+                                        })
+                                        .catch(err => res.status(500).json(err, 'ytlinks'))
+                                })
+                                .catch(err => res.status(500).json(err, 'agents'))
+
+                        })
+                        .catch(err => res.status(500).json(err, 'othergames'))
+                })
+                .catch(err => res.status(500).json(err, 'creators'))
+        })
+        .catch(err => res.status(500).json(err, 'details'))
+
+    // Details.findCarpics(id)
+    //     .then(users => carpics = users)
+    //     .catch(err => res.status(500).json(err))
+})
+
 // router.delete('/:id', (req, res) => {
 //     const { id } = req.params
 
