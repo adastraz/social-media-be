@@ -132,14 +132,14 @@ router.get('/:id/details/rl', idUser, (req, res) => {
                     Details.findOthergames(id)
                         .then(userothergames => {
                             Details.findCarpics(id)
-                                .then(usercarpics => {
+                                .then(carpics => {
                                     Details.findYtlinks(id)
                                         .then(userytlinks => {
                                             res.status(200).json({
                                                 user_details: userdetails[0],
                                                 user_creators: usercreators,
                                                 user_othergames: userothergames,
-                                                user_carpics: usercarpics,
+                                                user_carpics: carpics,
                                                 user_ytlinks: userytlinks
                                             })
                                         })
