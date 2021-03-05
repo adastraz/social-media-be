@@ -1,6 +1,6 @@
 const router = require('express').Router()
 
-const Games = require('./schedule-model.js')
+const Games = require('./games-model.js')
 
 router.get('/:game/game', (req, res) => {
     const { game } = req.params
