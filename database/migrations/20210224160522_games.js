@@ -10,7 +10,7 @@ exports.up = function(knex) {
             tbl.string('opp_team')
                 .notNullable()
             tbl.string('opp_teamimg')
-            tbl.date('date')
+            tbl.string('date')
                 .notNullable()
             tbl.string('time')
                 .notNullable()
