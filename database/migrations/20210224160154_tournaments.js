@@ -6,9 +6,7 @@ exports.up = function(knex) {
             tbl.string('name')
                 .notNullable()
             tbl.string('img')
-            tbl.date('begin_date')
-                .notNullable()
-            tbl.date('end_date')
+            tbl.string('start_date')
                 .notNullable()
             tbl.string('start_time')
                 .notNullable()
@@ -18,8 +16,8 @@ exports.up = function(knex) {
                 .defaultTo('https://www.twitch.tv/hyperspacedark')
             tbl.string('game')
                 .notNullable()
-            tbl.string('bracket')
-                .defaultTo('Unavailable')
+            tbl.string('battlefy')
+                .notNullable()
         })
 }
 
