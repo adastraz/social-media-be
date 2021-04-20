@@ -11,13 +11,13 @@ module.exports = {
 
 function find() {
     return db('tournaments')
-        .orderBy('date', 'asc')
+        .orderBy('start_date', 'asc')
 }
 
 function findByGame(game) {
     return db('tournaments')
         .where({ game: game })
-        .orderBy('date', 'asc')
+        .orderBy('start_date', 'asc')
 }
 
 async function add(tournament) {
