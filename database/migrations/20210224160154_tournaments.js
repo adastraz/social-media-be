@@ -16,7 +16,7 @@ exports.up = function(knex) {
                 .defaultTo('https://www.twitch.tv/hyperspacedark')
             tbl.string('game')
                 .notNullable()
-            tbl.string('battlefy')
+            tbl.string('link')
                 .notNullable()
         })
 }
