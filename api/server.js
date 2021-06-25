@@ -12,6 +12,7 @@ const commentsRouter = require('./comments/comments-router.js')
 const ViewPosts = require('./viewposts/viewposts-router.js')
 const ViewUser = require('./viewuser/viewuser-router.js')
 const tournamentsRouter = require('./tournaments/tournaments-router.js')
+const viewtournamentsRouter = require('./tournaments/viewtournaments-router.js')
 const gamesRouter = require('./games/games-router.js')
 
 const server = express()
@@ -29,6 +30,7 @@ server.use('/api/posts', authenticate, postsRouter)
 server.use('/api/likes', authenticate, likesRouter)
 server.use('/api/comments', authenticate, commentsRouter)
 server.use('/api/tournaments', authenticate, tournamentsRouter)
+server.use('/api/viewtournaments', viewtournamentsRouter)
 server.use('/api/games', authenticate, gamesRouter)
 
 server.get('/', (req, res) => {
