@@ -22,7 +22,7 @@ function update(id, changes){
 function findByTournamentId(id) {
     return db('games')
         .where({ tournament_id: id })
-        .orderBy('date', 'asc')
+        // .orderBy('date', 'asc')
 }
 
 function findById(id) {
